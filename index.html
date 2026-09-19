@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>室内设计作品集 | Interior Design Portfolio</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+  :root{
+    --ink:#111111;
+    --ink-2:#3a3a3a;
+    --gray:#8a8a8a;
+    --line:#e6e6e6;
+    --bg:#ffffff;
+    --bg-2:#fafafa;
+    --serif:"Noto Serif SC", Georgia, "Songti SC", serif;
+    --sans:"Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 40px;}
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;justify-content:space-between;align-items:center;height:72px;}
+  .logo{font-family:var(--serif);font-weight:700;font-size:18px;letter-spacing:3px;}
+  .logo span{color:var(--gray);font-weight:400;}
+  .nav-links{display:flex;gap:36px;font-size:13px;letter-spacing:1px;}
+  .nav-links a{color:var(--ink-2);transition:color .2s;position:relative;padding:4px 0;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a.active{color:var(--ink);}
+  .nav-links a.active::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:var(--ink);
+  }
+  .menu-btn{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;padding:8px;}
+  .menu-btn span{width:24px;height:1.5px;background:var(--ink);}
+  main{padding-top:72px;}
+  .view{display:none;}
+  .view.active{display:block;animation:fade .4s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .hero{
+    min-height:calc(100vh - 72px);
+    display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
+  }
+  .hero-text{
+    display:flex;flex-direction:column;justify-content:center;
+    padding:80px 60px 80px 0;
+  }
+  .hero-eyebrow{font-size:12px;letter-spacing:4px;color:var(--gray);margin-bottom:32px;text-transform:uppercase;}
+  .hero-title{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(44px,6vw,84px);line-height:1.12;letter-spacing:2px;
+  }
+  .hero-sub{margin-top:28px;font-size:16px;color:var(--ink-2);max-width:440px;}
+  .hero-meta{margin-top:56px;display:flex;gap:48px;font-size:12px;letter-spacing:1px;color:var(--gray);}
+  .hero-meta b{display:block;font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:600;margin-bottom:4px;}
+  .hero-img{position:relative;overflow:hidden;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;}
+  .section{padding:110px 0;}
+  .section-head{margin-bottom:64px;}
+  .section-index{font-size:12px;letter-spacing:3px;color:var(--gray);margin-bottom:14px;}
+  .section-title{font-family:var(--serif);font-weight:700;font-size:40px;letter-spacing:2px;}
+  .section-rule{width:48px;height:2px;background:var(--ink);margin-top:24px;}
+  .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;}
+  .about-photo{aspect-ratio:3/4;overflow:hidden;background:#eee;}
+  .about-photo img{width:100%;height:100%;object-fit:cover;}
+  .about-text p{margin-bottom:20px;color:var(--ink-2);font-size:15px;}
+  .about-text strong{color:var(--ink);font-weight:500;}
+  .skill-list{margin-top:36px;border-top:1px solid var(--line);}
+  .skill-row{display:grid;grid-template-columns:160px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .skill-row b{font-weight:500;color:var(--ink);}
+  .skill-row span{color:var(--gray);}
+  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .cat-card{position:relative;display:block;overflow:hidden;cursor:pointer;}
+  .cat-card-img{aspect-ratio:4/3;overflow:hidden;background:#eee;position:relative;}
+  /* 透明防盗覆盖层 */
+  .cat-card-img .protect-overlay{position:absolute;inset:0;z-index:2;background:transparent;}
+  .cat-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .cat-card:hover .cat-card-img img{transform:scale(1.04);}
+  .cat-card-body{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0 4px;}
+  .cat-card-body h3{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:2px;}
+  .cat-card-body .count{font-size:13px;color:var(--gray);}
+  .cat-card-desc{font-size:13px;color:var(--gray);padding-bottom:16px;}
+  .cat-hero{padding:110px 0 70px;border-bottom:1px solid var(--line);}
+  .cat-hero .section-index{color:var(--gray);}
+  .cat-hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(36px,4.5vw,60px);letter-spacing:3px;margin-top:10px;}
+  .cat-hero p{max-width:620px;color:var(--ink-2);margin-top:20px;font-size:15px;}
+  .proj-list{padding:70px 0;}
+  .proj-row{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;
+    padding:56px 0;border-bottom:1px solid var(--line);cursor:pointer;
+  }
+  .proj-row:nth-child(even){grid-template-columns:1fr 1.1fr;}
+  .proj-row:nth-child(even) .proj-media{order:2;}
+  .proj-media{aspect-ratio:4/3;overflow:hidden;background:#eee;position:relative;}
+  .proj-media .protect-overlay{position:absolute;inset:0;z-index:2;background:transparent;}
+  .proj-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+  .proj-row:hover .proj-media img{transform:scale(1.03);}
+  .proj-info .tag{font-size:12px;letter-spacing:2px;color:var(--gray);}
+  .proj-info h3{font-family:var(--serif);font-weight:600;font-size:30px;letter-spacing:2px;margin:12px 0 18px;}
+  .proj-info p{color:var(--ink-2);font-size:14px;max-width:440px;}
+  .proj-meta{display:flex;gap:32px;margin-top:24px;font-size:12px;color:var(--gray);letter-spacing:1px;}
+  .proj-meta b{color:var(--ink);font-weight:500;display:block;font-size:14px;margin-top:2px;}
+  .pd-hero{padding:90px 0 60px;}
+  .pd-hero .crumb{font-size:12px;letter-spacing:2px;color:var(--gray);margin-bottom:24px;}
+  .pd-hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(34px,4.5vw,58px);letter-spacing:3px;}
+  .pd-hero .en{font-size:13px;letter-spacing:3px;color:var(--gray);margin-top:12px;text-transform:uppercase;}
+  .pd-grid{display:grid;grid-template-columns:220px 1fr;gap:60px;padding:50px 0;border-top:1px solid var(--line);}
+  .pd-meta-row{padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;}
+  .pd-meta-row b{display:block;font-weight:500;margin-bottom:3px;}
+  .pd-meta-row span{color:var(--gray);}
+  .pd-desc p{font-size:15px;color:var(--ink-2);margin-bottom:18px;max-width:680px;}
+  .pd-gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(420px,1fr));
+    gap:24px;
+    padding-bottom:90px;
+  }
+  .pd-gallery figure{overflow:hidden;position:relative;cursor:zoom-in;}
+  /*画廊图片透明防盗遮罩 */
+  .pd-gallery figure .protect-overlay{position:absolute;inset:0;z-index:2;background:transparent;}
+  .pd-gallery img{width:100%;}
+  .pd-nav{display:flex;justify-content:space-between;padding:30px 0 90px;border-top:1px solid var(--line);font-size:13px;letter-spacing:1px;}
+  .pd-nav a{color:var(--ink-2);}
+  .pd-nav a:hover{color:var(--ink);}
+  .resume-box{border:1px solid var(--line);padding:48px;}
+  .resume-box p{color:var(--ink-2);margin-bottom:14px;max-width:620px;}
+  .btn{
+    display:inline-block;margin-top:24px;padding:14px 36px;
+    border:1px solid var(--ink);font-size:13px;letter-spacing:2px;
+    transition:.25s;background:transparent;cursor:pointer;
+  }
+  .btn:hover{background:var(--ink);color:#fff;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+  .contact-line{padding:20px 0;border-bottom:1px solid var(--line);}
+  .contact-line b{display:block;font-weight:500;margin-bottom:4px;}
+  .contact-line span{color:var(--gray);font-size:14px;}
+  footer{border-top:1px solid var(--line);padding:36px 0;font-size:12px;color:var(--gray);letter-spacing:1px;}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;}
+  /* 放大弹窗 */
+  .image-lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .image-lightbox.show{display:flex;}
+  .lightbox-inner{position:relative;}
+  /* 放大弹窗内部防盗透明层 */
+  .lightbox-inner .protect-overlay{position:absolute;inset:0;z-index:10;background:transparent;}
+  .image-lightbox img{max-width:100%;max-height:100%;object-fit:contain;}
+
+  @media(max-width:880px){
+    .wrap{padding:0 22px;}
+    .nav-links{
+      display:none;position:fixed;top:72px;left:0;right:0;
+      flex-direction:column;background:#fff;border-bottom:1px solid var(--line);
+      padding:20px 22px;gap:18px;
+    }
+    .nav-links.open{display:flex;}
+    .menu-btn{display:flex;}
+    .hero{grid-template-columns:1fr;}
+    .hero-text{padding:60px 0 40px;}
+    .hero-img{min-height:320px;}
+    .about-grid{grid-template-columns:1fr;gap:40px;}
+    .cat-grid{grid-template-columns:1fr;gap:32px;}
+    .proj-row,.proj-row:nth-child(even){grid-template-columns:1fr;gap:24px;}
+    .proj-row:nth-child(even) .proj-media{order:0;}
+    .pd-grid{grid-template-columns:1fr;gap:32px;}
+    .pd-gallery{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;gap:32px;}
+    .section{padding:70px 0;}
+    .section-title{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+<div class="image-lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="protect-overlay"></div>
+    <img id="lightboxImg" src="" alt="放大预览">
+  </div>
+</div>
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#/" class="logo">AIKE<span> DESIGN</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="菜单"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#/" data-nav="home">首页</a>
+      <a href="#/about" data-nav="about">关于我</a>
+      <a href="#/works" data-nav="works">作品</a>
+      <a href="#/resume" data-nav="resume">简历</a>
+      <a href="#/contact" data-nav="contact">联系</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <section class="view" id="view-home">
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Design Philosophy</div>
+        <h1>以空间为纸<br>以光影为笔</h1>
+        <p class="hero-sub">专注私宅别墅、商业空间、公共建筑空间与产业特殊空间设计，从概念到落地，用克制的语言还原空间的功能与质感。</p>
+        <div class="hero-meta">
+          <div><b>06+</b>年设计经验</div>
+          <div><b>50+</b>落地项目</div>
+          <div><b>4</b>大空间类型</div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="img/bj01.jpg" alt="背景图">
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-about">
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-index">ABOUT</div>
+          <h2 class="section-title">关于我</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="about-grid">
+          <div class="about-photo">
+            <img src="img/aike02.jpg" alt="头像">
+          </div>
+          <div class="about-text">
+            <p>从事室内设计 [6] 年，主案负责从概念方案、施工图深化、软装搭配到现场落地的全流程设计。</p>
+            <p>擅长<strong>居住空间、商业餐饮、公共建筑与产业特殊空间</strong>，重视空间动线、材质光影与落地可行性，相信好的设计是克制而非堆砌。</p>
+            <div class="skill-list">
+              <div class="skill-row"><b>软件技能</b><span>AutoCAD / SketchUp / Enscape / D5 / Photoshop</span></div>
+              <div class="skill-row"><b>服务范围</b><span>方案设计 · 施工图 · 效果图 · 软装 · 现场对接</span></div>
+              <div class="skill-row"><b>所在城市</b><span>福建 · 福州</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-works">
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-index">WORKS</div>
+          <h2 class="section-title">作品分类</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="cat-grid" id="catGrid"></div>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-category">
+    <div class="cat-hero">
+      <div class="wrap">
+        <div class="section-index" id="catIndex">CATEGORY</div>
+        <h1 id="catTitle">居住空间</h1>
+        <p id="catDesc"></p>
+      </div>
+    </div>
+    <div class="wrap proj-list" id="projList"></div>
+  </section>
+  <section class="view" id="view-project">
+    <div class="wrap pd-hero">
+      <div class="crumb" id="pdCrumb">作品 / 商业空间</div>
+      <h1 id="pdTitle">项目名称</h1>
+      <div class="en" id="pdEn">Project Name</div>
+    </div>
+    <div class="wrap pd-grid">
+      <div class="pd-meta" id="pdMeta"></div>
+      <div class="pd-desc" id="pdDesc"></div>
+    </div>
+    <div class="wrap pd-gallery" id="pdGallery"></div>
+    <div class="wrap pd-nav" id="pdNav"></div>
+  </section>
+  <section class="view" id="view-resume">
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-index">RESUME</div>
+          <h2 class="section-title">个人简历</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="resume-box">
+          <p>完整简历包含工作经历、项目履历与教育背景，可下载 PDF 查阅。</p>
+          <p>如需进一步沟通合作，欢迎通过联系方式与我联系。</p>
+          <a href="./简历.pdf" class="btn">下载简历 PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-contact">
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-index">CONTACT</div>
+          <h2 class="section-title">联系方式</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="contact-grid">
+          <div>
+            <div class="contact-line"><b>邮箱</b><span>389380626@qq.com</span></div>
+            <div class="contact-line"><b>微信</b><span>zhangdunchang</span></div>
+            <div class="contact-line"><b>电话</b><span>177‑1584‑8549</span></div>
+          </div>
+          <div>
+            <div class="contact-line"><b>AIKE设计工作室</b><span>福建 · 福州</span></div>
+            <div class="contact-line"><b>合作范围</b><span>居住 / 商业 / 公共 / 产业空间全案</span></div>
+            <div class="contact-line"><b>工作时间</b><span>周一至周六 9:00 – 18:30</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot-inner">
+    <div>© 2026 AIKE DESIGN · 室内设计作品集</div>
+    <div>INTERIOR DESIGN PORTFOLIO</div>
+  </div>
+</footer>
+<script>
+var CATEGORIES = [
+  {
+    id:"residential", en:"RESIDENTIAL", name:"居住空间",
+    img:"img/fm1.jpg",
+    desc:"从一居室到私宅别墅，以居住者的日常动线为核心，用材质与光线营造安静、耐看的家。",
+    projects:["a1","a2","a3"]
+  },
+  {
+    id:"commercial", en:"COMMERCIAL", name:"商业空间",
+    img:"img/fm2.jpg",
+    desc:"餐饮、零售与体验型门店，在品牌表达与坪效之间取得平衡，让空间成为生意的一部分。",
+    projects:["b1","b2"]
+  },
+  {
+    id:"public", en:"PUBLIC", name:"公共建筑空间",
+    img:"https://aka.doubaocdn.com/s/8UVzJstrxA",
+    desc:"大堂、展陈与文化空间，强调秩序感、人流组织与公共性，让建筑气质可被感知。",
+    projects:["c1","c2"]
+  },
+  {
+    id:"industrial", en:"INDUSTRIAL", name:"产业特殊空间",
+    img:"https://aka.doubaocdn.com/s/1ob9pRI9mx",
+    desc:"仓库改造、办公、机房与银行等特殊业态，兼顾工艺约束、功能效率与空间美学。",
+    projects:["d1"]
+  }
+];
+var PROJECTS = {
+  a1:{
+    cat:"residential", title:"知己山房改造", en:"Minimal Urban Apartment",
+    type:"住宅 / 全案", area:"220 ㎡", loc:"闽侯", year:"2026",
+    img:"img/fm1.jpg",
+    gallery:[
+      "img/a01.jpg",
+      "img/a02.jpg",
+      "img/a04.jpg","img/fm1.jpg","img/a09.jpg","img/a06.jpg","img/a10.jpg","img/a13.jpg"
+    ],
+    desc:["以白、灰与原木为基调，打通客餐厅与阳台，引入南向自然光。","用隐藏式收纳与无主灯设计弱化存在感，让家具与光影成为空间主角。"]
+  },
+  a2:{
+    cat:"residential", title:"烟台山壹号", en:"Hillside Bedroom",
+    type:"住宅 / 全案", area:"500 ㎡", loc:"福州", year:"2025",
+    img:"img/b07.jpg",
+    gallery:[
+      "img/b07.jpg",
+      "img/b04.jpg","img/b03.jpg","img/b01.jpg","img/b05.jpg","img/b06.jpg","img/b02.jpg"
+    ],
+    desc:["木饰面与低饱和墙面，配合窗帘的漫反射光线，营造安静入睡的氛围。","床体与墙面一体化处理，弱化床头存在感，留白即设计。"]
+  },
+a3:{
+    cat:"residential", title:"正阳田外", en:"Zhengyang Project",
+    type:"住宅 / 旧改", area:"120 ㎡", loc:"福州", year:"2025",
+    img:"img/c1.jpg",
+    gallery:[
+      "img/c1.jpg",
+      "img/c2.jpg","img/c3.jpg","img/c4.jpg"
+    ],
+    desc:["保留原始混凝土柱与钢屋架，仅以长桌与悬挂灯具介入。","工业质感与协作办公结合，最大限度控制改造成本与周期。"]
+  },
+  b1:{
+    cat:"commercial", title:"混凝土咖啡馆", en:"Concrete Cafe",
+    type:"餐饮 / 咖啡", area:"96 ㎡", loc:"福州", year:"2024",
+    img:"img/fm2.jpg",
+    gallery:[
+      "img/fm2.jpg",
+      "img/cafe_02.jpg"
+    ],
+    desc:["清水混凝土长吧台贯穿全店，吊灯沿中轴排列，形成强烈的秩序感。","白天与夜间通过灯光色温切换，兼顾外带与久坐两种客群。"]
+  },
+  b2:{
+    cat:"commercial", title:"极简服饰买手店", en:"Boutique Store",
+    type:"零售 / 买手店", area:"140 ㎡", loc:"厦门", year:"2023",
+    img:"img/fm2.jpg",
+    gallery:[
+      "img/fm2.jpg"
+    ],
+    desc:["白墙与轨道射灯构成中性背景，让服装成为唯一主角。","中央陈列岛替代传统货架，强化逛店的节奏与仪式感。"]
+  },
+  c1:{
+    cat:"public", title:"城市文化中心大堂", en:"Cultural Center Lobby",
+    type:"公共建筑 / 大堂", area:"1200 ㎡", loc:"福州", year:"2022",
+    img:"https://aka.doubaocdn.com/s/8UVzJstrxA",
+    gallery:[
+      "https://aka.doubaocdn.com/s/8UVzJstrxA"
+    ],
+    desc:["双层挑空大堂以白色大理石与玻璃幕墙定义空间，楼梯成为视觉焦点。","人流沿弧形主动线组织，自然光从顶光井均匀洒落。"]
+  },
+  c2:{
+    cat:"public", title:"当代美术馆展厅", en:"Art Gallery",
+    type:"展陈 / 美术馆", area:"680 ㎡", loc:"泉州", year:"2023",
+    img:"https://aka.doubaocdn.com/s/YHDc3fA7FO",
+    gallery:[
+      "https://aka.doubaocdn.com/s/YHDc3fA7FO"
+    ],
+    desc:["纯白展墙与可调节轨道灯，为不同展陈主题提供中性底色。","廊道纵深引导观展节奏，端点留白作为视觉喘息。"]
+  },
+  d1:{
+    cat:"industrial", title:"仓库改造联合办公", en:"Warehouse Coworking",
+    type:"办公 / 旧改", area:"850 ㎡", loc:"福州", year:"2024",
+    img:"https://aka.doubaocdn.com/s/1ob9pRI9mx",
+    gallery:[
+      "https://aka.doubaocdn.com/s/1ob9pRI9mx"
+    ],
+    desc:["保留原始混凝土柱与钢屋架，仅以长桌与悬挂灯具介入。","工业质感与协作办公结合，最大限度控制改造成本与周期。"]
+  }
+};
+
+//渲染分类卡片
+function renderCats(){
+  var html = "";
+  CATEGORIES.forEach(function(c,i){
+    html += '<a class="cat-card" href="#/works/'+c.id+'">'
+      +'<div class="cat-card-img"><div class="protect-overlay"></div><img src="'+c.img+'" alt="'+c.name+'"></div>'
+      +'<div class="cat-card-body"><h3>'+c.name+'</h3><span class="count">'+c.projects.length+' 个项目</span></div>'
+      +'<div class="cat-card-desc">'+c.desc+'</div>'
+      +'</a>';
+  });
+  document.getElementById("catGrid").innerHTML = html;
+}
+
+//渲染分类列表页
+function renderCategory(catId){
+  var cat = CATEGORIES.find(function(c){return c.id===catId;});
+  if(!cat){ location.hash = "#/works"; return; }
+  document.getElementById("catIndex").textContent = cat.en + " / " + ("0"+(CATEGORIES.indexOf(cat)+1)).slice(-2);
+  document.getElementById("catTitle").textContent = cat.name;
+  document.getElementById("catDesc").textContent = cat.desc;
+  var html = "";
+  cat.projects.forEach(function(pid){
+    var p = PROJECTS[pid];
+    html += '<a class="proj-row" href="#/project/'+pid+'">'
+      +'<div class="proj-media"><div class="protect-overlay"></div><img src="'+p.img+'" alt="'+p.title+'"></div>'
+      +'<div class="proj-info">'
+      +'<div class="tag">'+p.type+'</div>'
+      +'<h3>'+p.title+'</h3>'
+      +'<p>'+p.desc[0]+'</p>'
+      +'<div class="proj-meta">'
+      +'<div>面积<b>'+p.area+'</b></div>'
+      +'<div>地点<b>'+p.loc+'</b></div>'
+      +'<div>年份<b>'+p.year+'</b></div>'
+      +'</div></div></a>';
+  });
+  document.getElementById("projList").innerHTML = html;
+}
+
+//渲染项目详情
+function renderProject(pid){
+  var p = PROJECTS[pid];
+  if(!p){ location.hash = "#/works"; return; }
+  var cat = CATEGORIES.find(function(c){return c.id===p.cat;});
+  document.getElementById("pdCrumb").innerHTML = '<a href="#/works">作品</a> / <a href="#/works/'+cat.id+'">'+cat.name+'</a>';
+  document.getElementById("pdTitle").textContent = p.title;
+  document.getElementById("pdEn").textContent = p.en;
+  var meta = [
+    ["项目类型", p.type],["项目面积", p.area],
+    ["项目地点", p.loc],["完成年份", p.year]
+  ];
+  document.getElementById("pdMeta").innerHTML = meta.map(function(m){
+    return '<div class="pd-meta-row"><b>'+m[0]+'</b><span>'+m[1]+'</span></div>';
+  }).join("");
+  document.getElementById("pdDesc").innerHTML = p.desc.map(function(t){
+    return '<p>'+t+'</p>';
+  }).join("");
+
+  let galleryHtml = "";
+  p.gallery.forEach(function(imgUrl){
+    galleryHtml += '<figure><div class="protect-overlay"></div><img src="'+imgUrl+'" alt="'+p.title+'"></figure>';
+  });
+  document.getElementById("pdGallery").innerHTML = galleryHtml;
+
+  var idx = cat.projects.indexOf(pid);
+  var prev = cat.projects[idx-1], next = cat.projects[idx+1];
+  var navHtml = "";
+  navHtml += prev ? '<a href="#/project/'+prev+'">← '+PROJECTS[prev].title+'</a>' : '<span></span>';
+  navHtml += next ? '<a href="#/project/'+next+'">'+PROJECTS[next].title+' →</a>' : '<span></span>';
+  document.getElementById("pdNav").innerHTML = navHtml;
+}
+
+function show(id){
+  var views = document.querySelectorAll(".view");
+  for(var i=0;i<views.length;i++){ views[i].classList.remove("active"); }
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+  var map = {"view-home":"home","view-about":"about","view-works":"works","view-resume":"resume","view-contact":"contact"};
+  document.querySelectorAll(".nav-links a").forEach(function(a){
+    a.classList.toggle("active", a.dataset.nav===map[id]);
+  });
+  document.getElementById("navLinks").classList.remove("open");
+}
+
+function route(){
+  var h = location.hash.replace(/^#\/?/,"") || "home";
+  var parts = h.split("/");
+  if(parts[0]==="works"){
+    if(parts[1]){ renderCategory(parts[1]); show("view-category"); }
+    else { renderCats(); show("view-works"); }
+  } else if(parts[0]==="project"){
+    renderProject(parts[1]); show("view-project");
+  } else if(["home","about","resume","contact"].indexOf(parts[0])>=0){
+    show("view-"+parts[0]);
+  } else {
+    show("view-home");
+  }
+}
+
+//放大弹窗逻辑
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+function closeLightbox(){
+  lightbox.classList.remove("show");
+}
+function openLightbox(src){
+  lightboxImg.src = src;
+  lightbox.classList.add("show");
+}
+
+//绑定双击放大
+function bindGalleryDblClick(){
+  // 点击透明遮罩层触发双击放大
+  const overlays = document.querySelectorAll("#pdGallery .protect-overlay");
+  overlays.forEach(function(ov){
+    ov.ondblclick = function(){
+      const imgEl = this.nextElementSibling;
+      openLightbox(imgEl.src);
+    }
+  });
+}
+
+window.addEventListener("DOMContentLoaded", function(){
+  renderCats();
+  route();
+  bindGalleryDblClick();
+
+  document.getElementById("menuBtn").addEventListener("click", function(){
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+
+  lightbox.onclick = function(e){
+    if(e.target === lightbox) closeLightbox();
+  };
+  document.addEventListener("keydown",function(e){
+    if(e.key === "Escape") closeLightbox();
+  });
+
+  //全局拦截拖拽
+  document.addEventListener("dragstart",function(e){
+    e.preventDefault();
+  });
+  //全局拦截右键菜单
+  document.addEventListener("contextmenu",function(e){
+    e.preventDefault();
+  });
+});
+
+window.addEventListener("hashchange", function(){
+  route();
+  bindGalleryDblClick();
+});
+</script>
+</body>
+</html>
