@@ -236,7 +236,7 @@
             <img src="img/aike02.jpg" alt="头像">
           </div>
           <div class="about-text">
-            <p>从事室内设计 [6] 年，主案负责从概念方案、施工图深化、软装搭配到现场落地的全流程设计。</p>
+            <p>从事室内设计 [6] 年，主要负责从概念方案、施工图深化、软装搭配到现场落地的全流程设计。</p>
             <p>擅长<strong>居住空间、商业餐饮、公共建筑与产业特殊空间</strong>，重视空间动线、材质光影与落地可行性，相信好的设计是克制而非堆砌。</p>
             <div class="skill-list">
               <div class="skill-row"><b>软件技能</b><span>AutoCAD / SketchUp / Enscape / D5 / Photoshop</span></div>
@@ -335,7 +335,7 @@ var CATEGORIES = [
     id:"residential", en:"RESIDENTIAL", name:"居住空间",
     img:"img/fm1.jpg",
     desc:"从一居室到私宅别墅，以居住者的日常动线为核心，用材质与光线营造安静、耐看的家。",
-    projects:["a1","a2","a3"]
+    projects:["a1","a2","a3","a4"]
   },
   {
     id:"commercial", en:"COMMERCIAL", name:"商业空间",
@@ -358,54 +358,66 @@ var CATEGORIES = [
 ];
 var PROJECTS = {
   a1:{
-    cat:"residential", title:"知己山房改造", en:"Minimal Urban Apartment",
-    type:"住宅 / 全案", area:"220 ㎡", loc:"闽侯", year:"2026",
+    cat:"residential", title:"知己山房改造", en:"Zhiji Mountain Retreat",
+    type:"住宅 / 全案", area:"220 ㎡", loc:"闽侯", year:"2025",
     img:"img/fm1.jpg",
     gallery:[
       "img/a01.jpg",
       "img/a02.jpg",
       "img/a04.jpg","img/fm1.jpg","img/a09.jpg","img/a06.jpg","img/a10.jpg","img/a13.jpg"
     ],
-    desc:["以白、灰与原木为基调，打通客餐厅与阳台，引入南向自然光。","用隐藏式收纳与无主灯设计弱化存在感，让家具与光影成为空间主角。"]
+    desc:["本私宅为现代乡居风格，以质朴素墙、原木与天然石材构建空间。","通透开窗引景入室，柔和自然光漫布室内，客厅、餐厅、卧室有序排布，营造松弛温润、自然安静的居住氛围。"]
   },
   a2:{
-    cat:"residential", title:"烟台山壹号", en:"Hillside Bedroom",
+    cat:"residential", title:"烟台山壹号", en:"Yantai Mountain No.1 Large Flat",
     type:"住宅 / 全案", area:"500 ㎡", loc:"福州", year:"2025",
     img:"img/b07.jpg",
     gallery:[
       "img/b07.jpg",
       "img/b04.jpg","img/b03.jpg","img/b01.jpg","img/b05.jpg","img/b06.jpg","img/b02.jpg"
     ],
-    desc:["木饰面与低饱和墙面，配合窗帘的漫反射光线，营造安静入睡的氛围。","床体与墙面一体化处理，弱化床头存在感，留白即设计。"]
+    desc:["现代轻奢大平层，以大理石与木饰面塑造精致质感。","通透格局串联餐厨、客厅与套房，金属格栅作为空间隔断，结合层次灯光，在阔绰尺度中呈现高级沉稳的都市居住气质。"]
   },
 a3:{
-    cat:"residential", title:"正阳田外", en:"Zhengyang Project",
-    type:"住宅 / 旧改", area:"120 ㎡", loc:"福州", year:"2025",
+    cat:"residential", title:"湖滨公寓", en:"Hubin Apartment Project",
+    type:"住宅 / 旧改", area:"120 ㎡", loc:"福州", year:"2026",
     img:"img/c1.jpg",
     gallery:[
       "img/c1.jpg",
       "img/c2.jpg","img/c3.jpg","img/c4.jpg"
     ],
-    desc:["保留原始混凝土柱与钢屋架，仅以长桌与悬挂灯具介入。","工业质感与协作办公结合，最大限度控制改造成本与周期。"]
+    desc:["以暖调原木与米色软装构建温润居所，柔和曲线吊顶弱化棱角，自然光透过纱帘漫入室内。","客厅、会客、卧室、工作区依次展开，材质统一、线条干净，呈现松弛宁静的现代居住气质。"]
+  },
+a4:{
+    cat:"residential", title:"正荣世茂悦南山", en:"Zhengrong Shimao Yueshanan Project",
+    type:"住宅 / 全案", area:"130 ㎡", loc:"福州", year:"2026",
+    img:"img/a406.jpg",
+    gallery:[
+      "img/a401.jpg",
+      "img/a402.jpg","img/a403.jpg","img/a404.jpg","img/a405.jpg","img/a406.jpg"
+    ],
+    desc:["现代简约私宅，保留原始建筑水泥梁，以素色墙面搭配原木，新旧材质形成对话。","简洁体块划分客餐厅与卧室，借自然采光与柔和灯光，营造安静质朴的居家氛围。"]
   },
   b1:{
-    cat:"commercial", title:"混凝土咖啡馆", en:"Concrete Cafe",
-    type:"餐饮 / 咖啡", area:"96 ㎡", loc:"福州", year:"2024",
+    cat:"commercial", title:"时一空间", en:"Time-Space Project",
+    type:"软装工作室 / 咖啡", area:"225 ㎡", loc:"福州", year:"2024",
     img:"img/fm2.jpg",
     gallery:[
-      "img/fm2.jpg",
-      "img/cafe_02.jpg"
+      "img/b101.jpg",
+      "img/fm2.jpg","img/b102.jpg","img/b103.jpg","img/b104.jpg","img/b105.jpg","img/b106.jpg","img/b107.jpg"
     ],
-    desc:["清水混凝土长吧台贯穿全店，吊灯沿中轴排列，形成强烈的秩序感。","白天与夜间通过灯光色温切换，兼顾外带与久坐两种客群。"]
+    desc:["空间采用现代东方极简风格，以米灰素色为基底，运用原木、石材等天然材质。","简约线条搭配柔和光影，划分接待、茶叙、会客与私宴区域，营造静谧内敛的东方雅致氛围。"]
   },
   b2:{
-    cat:"commercial", title:"极简服饰买手店", en:"Boutique Store",
-    type:"零售 / 买手店", area:"140 ㎡", loc:"厦门", year:"2023",
-    img:"img/fm2.jpg",
+    cat:"commercial", title:"阳阩堂民宿酒店", en:"Yangshantang Bed and Breakfast Hotel",
+    type:"建筑 / 民宿", area:"2000+ ㎡", loc:"平潭", year:"2024",
+    img:"img/b207.jpg",
     gallery:[
-      "img/fm2.jpg"
+      "img/b201.jpg","img/b202.jpg","img/b203.jpg","img/b204.jpg","img/b205.jpg","img/b206.jpg",
+       "img/b207.jpg","img/b208.jpg","img/b209.jpg","img/b210.jpg","img/b211.jpg","img/b212.jpg","img/b213.jpg","img/b214.jpg",
+       "img/b215.jpg","img/b216.jpg"
     ],
-    desc:["白墙与轨道射灯构成中性背景，让服装成为唯一主角。","中央陈列岛替代传统货架，强化逛店的节奏与仪式感。"]
+    desc:["民宿以质朴清水混凝土与原木为基调，建筑体量融于山海。","大面积玻璃窗框引海景入室内，公区、客房有序排布，以克制的材质与柔和光影，营造观海栖居的静谧体验。"]
   },
   c1:{
     cat:"public", title:"城市文化中心大堂", en:"Cultural Center Lobby",
